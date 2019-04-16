@@ -24,6 +24,11 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.Set;
+import android.os.IBinder;
+import net.xprinter.service.XprinterService;
+import net.xprinter.service.XprinterService.MyBinder;
+       
+import android.os.IBinder;
 
 /**
  * PhoneGap Plugin for Serial Communication over Bluetooth
@@ -339,7 +344,6 @@ public class BluetoothSerial extends CordovaPlugin {
     private void connect(CordovaArgs args, boolean secure, CallbackContext callbackContext) throws JSONException {
         String macAddress = args.getString(0);
         BluetoothDevice device = bluetoothAdapter.getRemoteDevice(macAddress);
-
         if (device != null) {
             connectCallback = callbackContext;
             bluetoothSerialService.connect(device, secure);

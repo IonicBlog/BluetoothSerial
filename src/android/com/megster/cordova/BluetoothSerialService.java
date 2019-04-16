@@ -14,7 +14,9 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
-
+import net.xprinter.utils.DataForSendToPrinterXp80;
+import net.xprinter.utils.DataForSendToPrinterXp58;
+import net.xprinter.utils.DataForSendToPrinterXp76;
 /**
  * This class does all the work for setting up and managing Bluetooth
  * connections with other devices. It has a thread that listens for
@@ -206,13 +208,8 @@ public class BluetoothSerialService {
      * @see ConnectedThread#write(byte[])
      */
     public void write(byte[] out) {
-       net.xprinter.utils.DataForSendToPrinterXp80.initializePrinter();//初始化打印机
-       net.xprinter.utils.DataForSendToPrinterXp80.selectInternationalCharacterSets(15);//15为中文
-       net.xprinter.utils.DataForSendToPrinterXp80.selectAlignment(48);//对其方式：居中
-       net.xprinter.utils.DataForSendToPrinterXp80.selectCharacterSize(2);//n的0到3位设定字符高度，4-7位用来设定字符宽度
-       net.xprinter.utils.DataForSendToPrinterXp80.selectCharacterSize(6);//n的0到3位设定字符高度，4-7位用来设定字符宽度
-       net.xprinter.utils.DataForSendToPrinterXp80.printAndFeedLine();//换行
-        
+
+
         // Create temporary object
         ConnectedThread r;
         // Synchronize a copy of the ConnectedThread
@@ -220,8 +217,21 @@ public class BluetoothSerialService {
             if (mState != STATE_CONNECTED) return;
             r = mConnectedThread;
         }
-        // Perform the write unsynchronized
+
+        //r.write(DataForSendToPrinterXp80.initializePrinter());//初始化打印机
+        r.write(DataForSendToPrinterXp80.selectInternationalCharacterSets(0x0F));//15为中文
         r.write(out);
+        //r.write(DataForSendToPrinterXp80.selectAlignment(1));//对其方式：居中
+        //r.write(DataForSendToPrinterXp80.selectAlignment(49));//对其方式：居中
+//        r.write(DataForSendToPrinterXp80.selectCharacterSize(3));//n的0到3位设定字符高度，4-7位用来设定字符宽度
+       // r.write(DataForSendToPrinterXp80.selectCharacterSize(7));//n的0到3位设定字符高度，4-7位用来设定字符宽度
+        // r.write(out);
+        // r.write(DataForSendToPrinterXp80.printAndFeedLine());//换行
+        // r.write(out);
+        // r.write(DataForSendToPrinterXp80.printAndFeedLine());//换行
+        // r.write(out);
+        // r.write(DataForSendToPrinterXp80.printAndFeedLine());//换行
+        // r.write(out);
     }
 
     /**
