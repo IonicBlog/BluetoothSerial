@@ -206,9 +206,13 @@ public class BluetoothSerialService {
      * @see ConnectedThread#write(byte[])
      */
     public void write(byte[] out) {
-
-        net.xprinter.utils.DataForSendToPrinterXp80.selectPrintModel(1);
-
+       net.xprinter.utils.DataForSendToPrinterXp80.initializePrinter();//初始化打印机
+       net.xprinter.utils.DataForSendToPrinterXp80.selectInternationalCharacterSets(15);//15为中文
+       net.xprinter.utils.DataForSendToPrinterXp80.selectAlignment(48);//对其方式：居中
+       net.xprinter.utils.DataForSendToPrinterXp80.selectCharacterSize(2);//n的0到3位设定字符高度，4-7位用来设定字符宽度
+       net.xprinter.utils.DataForSendToPrinterXp80.selectCharacterSize(6);//n的0到3位设定字符高度，4-7位用来设定字符宽度
+       net.xprinter.utils.DataForSendToPrinterXp80.printAndFeedLine();//换行
+        
         // Create temporary object
         ConnectedThread r;
         // Synchronize a copy of the ConnectedThread
