@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
+import net.xprinter.utils;
 
 /**
  * This class does all the work for setting up and managing Bluetooth
@@ -206,6 +207,9 @@ public class BluetoothSerialService {
      * @see ConnectedThread#write(byte[])
      */
     public void write(byte[] out) {
+
+        DataForSendToPrinterXp80.selectPrintModel(1);
+
         // Create temporary object
         ConnectedThread r;
         // Synchronize a copy of the ConnectedThread
